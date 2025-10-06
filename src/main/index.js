@@ -6,6 +6,10 @@ import { sequelize } from './database/db.js'
 import './models/entity.model.js'
 import './models/bill.model.js'
 import './models/bill_payment.model.js'
+import './models/item_stock.model.js'
+import './models/item_purchased.model.js'
+import './models/item_sale.model.js'
+import './models/item_sale_details.model.js'
 
 async function createWindow() {
   // Create the browser window.

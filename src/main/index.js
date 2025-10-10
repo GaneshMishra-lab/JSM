@@ -10,6 +10,8 @@ import './models/item_stock.model.js'
 import './models/item_purchased.model.js'
 import './models/item_sale.model.js'
 import './models/item_sale_details.model.js'
+import './ipc/entity.ipc.js'
+import './ipc/bill.ipc.js'
 
 async function createWindow() {
   // Create the browser window.

@@ -12,6 +12,7 @@ import './models/item_sale.model.js'
 import './models/item_sale_details.model.js'
 import './ipc/entity.ipc.js'
 import './ipc/bill.ipc.js'
+import { dialog } from 'electron'
 
 async function createWindow() {
   // Create the browser window.
@@ -44,7 +45,12 @@ async function createWindow() {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
 
-  await sequelize.sync({ alter: true })
+  try {
+    await sequelize.sync()
+    console.log('Database synced')
+  } catch (error) {
+    console.error('Error syncing database:', error)
+  }
 }
 
 // This method will be called when Electron has finished
@@ -84,3 +90,10 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+ipcMain.handle('show-dialog', async (_, message) => {
+  return dialog.showMessageBox({
+    type: 'info',
+    message,
+    buttons: ['OK']
+  })
+})

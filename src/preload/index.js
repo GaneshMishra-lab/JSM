@@ -3,8 +3,9 @@ import { electronAPI } from '@electron-toolkit/preload'
 
 // Custom APIs for renderer
 const api = {
-  createBill: (billData) => ipcRenderer.invoke('create-bill', billData),
-  createEntity: (entityData) => ipcRenderer.invoke('create-entity', entityData)
+  createBill: ({ entity, billData, items }) => ipcRenderer.invoke('create-bill', { entity, billData, items }),
+  createEntity: (entityData) => ipcRenderer.invoke('create-entity', entityData),
+  showdialogue: (message) => ipcRenderer.invoke('show-dialog', message)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

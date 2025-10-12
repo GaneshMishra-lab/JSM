@@ -17,7 +17,7 @@ export const createBill = async ({ entity, billData, items }) => {
     )
 
     for (const item of items) {
-      await Itempurchased.create({ ...item, bill: newBill.id, metal: 'Gold' }, { transaction: t })
+      await Itempurchased.create({ ...item, bill: newBill.id }, { transaction: t })
     }
     await t.commit()
     return { success: true, billId: newBill.id }

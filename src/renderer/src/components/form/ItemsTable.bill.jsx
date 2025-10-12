@@ -1,14 +1,27 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import PropTypes from 'prop-types'
+import { Label } from '@/components/ui/label'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
-export default function ItemsTable({ Item, setItem, setCompleted }) {
+export default function ItemsTable({ Item, setItem, setCompleted, setMetalType }) {
   return (
     <div>
       <Card className="w-full max-w-full ">
         <CardHeader>
           <CardTitle>Items Purchased</CardTitle>
-          <CardDescription>Enter items purchased details</CardDescription>
+          <CardDescription>
+            <RadioGroup defaultValue="Gold" onValueChange={setMetalType} className="flex gap-5">
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="Gold" id="r1" />
+                <Label htmlFor="r1">Gold</Label>
+              </div>
+              <div className="flex items-center gap-3">
+                <RadioGroupItem value="Silver" id="r2" />
+                <Label htmlFor="r2">Silver</Label>
+              </div>
+            </RadioGroup>
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <table className="min-w-full border border-gray-700 rounded overflow-hidden">
@@ -45,7 +58,7 @@ export default function ItemsTable({ Item, setItem, setCompleted }) {
                         })
                       }
                       placeholder="Item Name"
-                    />{' '}
+                    />
                   </td>
                   <td className="px-2 py-1 border">
                     <Input
@@ -215,5 +228,6 @@ ItemsTable.propTypes = {
     })
   ).isRequired,
   setItem: PropTypes.func.isRequired,
-  setCompleted: PropTypes.func.isRequired
+  setCompleted: PropTypes.func.isRequired,
+  setMetalType: PropTypes.func.isRequired
 }

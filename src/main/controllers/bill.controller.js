@@ -27,3 +27,21 @@ export const createBill = async ({ entity, billData, items }) => {
     throw error
   }
 }
+
+export const getAllBills = async () => {
+  try {
+    const bills = await Bill.findAll({
+      include: [
+        { model: Entity, as: 'SupplierEntity', attributes: ['name', 'contact'] },
+        { model: Itempurchased, as: 'ItemsPurchased', attributes: ['metal'] }
+      ]
+    })
+    if (!bills) {
+      return []
+    }
+
+    return bills.map((bill) => bill.toJSON())
+  } catch (error) {
+    console.error('Error fetching bills:', error)
+  }
+}

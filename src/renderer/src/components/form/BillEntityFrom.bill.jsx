@@ -99,7 +99,7 @@ export default function BillForm() {
 
   return (
     <>
-      <div className=" hide-scrollbar dark flex-col justify-start items-start h-screen w-screen bg-[#171717]/95 p-0">
+      <div className=" hide-scrollbar dark flex-col justify-start items-start h-screen w-screen bg-[#171717]/95 pt-28 px-28 text-2xl">
         <Card className="w-full max-w-full">
           <CardHeader>
             <CardTitle>Bill Form</CardTitle>

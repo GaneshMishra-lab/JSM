@@ -95,7 +95,7 @@ export default function BillForm() {
 
   return (
     <>
-      <div className="dark flex-col justify-start items-start h-screen w-screen bg-[#171717]/95 p-4">
+      <div className="dark flex-col justify-start items-start h-screen w-screen bg-[#171717]/95 ">
         <Card className="w-full max-w-full">
           <CardHeader>
             <CardTitle>Bill Form</CardTitle>

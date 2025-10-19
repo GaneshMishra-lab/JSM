@@ -8,7 +8,8 @@ const api = {
   createEntity: (entityData) => ipcRenderer.invoke('create-entity', entityData),
   showdialogue: (message) => ipcRenderer.invoke('show-dialog', message),
   getAllEntities: () => ipcRenderer.invoke('get-all-entities'),
-  searchEntities: (name) => ipcRenderer.invoke('search-entities', name)
+  searchEntities: (name) => ipcRenderer.invoke('search-entities', name),
+  getAllBills: () => ipcRenderer.invoke('get-all-bills')
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

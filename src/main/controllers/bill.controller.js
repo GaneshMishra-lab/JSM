@@ -94,3 +94,19 @@ export const updateBillPayment = async ({ billId, paidAmount, date, mode }) => {
     throw error
   }
 }
+
+// show billPayment
+export const showBillPayment = async (billId) => {
+  try {
+    const payment = await Billpayment.findAll({
+      where: {
+        bill: billId
+      }
+    })
+
+    // return JSON.parse(JSON.stringify(payment))
+    return payment.map((p) => p.toJSON())
+  } catch (error) {
+    console.error('error finding bill', error)
+  }
+}

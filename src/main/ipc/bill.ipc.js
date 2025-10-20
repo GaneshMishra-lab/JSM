@@ -8,3 +8,4 @@ ipcMain.handle('get-bill-by-id', async (event, billId) => billController.getBill
 ipcMain.handle('update-bill-payment', async (event, { billId, paidAmount, date, mode }) =>
   billController.updateBillPayment({ billId, paidAmount, date, mode })
 )
+ipcMain.handle('get-bill-payment', async (event, billId) => billController.showBillPayment(billId))

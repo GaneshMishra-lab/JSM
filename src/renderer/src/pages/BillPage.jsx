@@ -10,14 +10,16 @@ import {
 import { useBillsPage } from '../hooks/billsPageHook'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import PaymentsBill from '../components/form/PaymentsBill.jsx'
+import PaymentsBillForm from '../components/form/PaymentsBillForm.jsx'
+import PaymentBillModal from '../components/dialog/PaymentBillDetails.jsx'
 
 export default function BillPage() {
   const nav = useNavigate()
   const { bills, fetchBills } = useBillsPage()
-  const [paymentsBillOpen, setPaymentsBillOpen] = useState(false)
+  const [paymentsBillFormOpen, setPaymentsBillFormOpen] = useState(false)
+  const [paymentsBillDetailsOpen, setPaymentsBillDetailsOpen] = useState(false)
   const [selectedBillId, setSelectedBillId] = useState(null)
-  const [pendingPayments, setPendingPayments] = useState()
+  const [amoutDetails, setAmountDetails] = useState([])
   return (
     <>
       <div className="pt-28 px-12 min-h-screen max-w-screen bg-[#171717]/95 ">
@@ -54,14 +56,24 @@ export default function BillPage() {
                 <div className="flex gap-4 justify-between w-full">
                   <div>Amount : {bill.bill_amt}</div>
                   {bill.paid_amt == bill.bill_amt ? (
-                    <div className="text-green-500 font-bold">Paid</div>
+                    <button
+                      className="text-green-500 font-bold cursor-pointer"
+                      title="See payment transactions."
+                      onClick={() => {
+                        setPaymentsBillDetailsOpen(true)
+                        setSelectedBillId(bill.id)
+                      }}
+                    >
+                      Paid
+                    </button>
                   ) : (
                     <button
                       className="bg-blue-600 px-4 py-1 rounded-lg cursor-pointer hover:text-black hover:font-extrabold "
+                      title="Pay the  pending amount."
                       onClick={() => {
-                        setPaymentsBillOpen(true)
+                        setPaymentsBillFormOpen(true)
                         setSelectedBillId(bill.id)
-                        setPendingPayments(bill.bill_amt - bill.paid_amt)
+                        setAmountDetails([bill.bill_amt, bill.paid_amt])
                       }}
                     >
                       Pay
@@ -73,13 +85,16 @@ export default function BillPage() {
           ))}
         </div>
       </div>
-      {paymentsBillOpen && (
-        <PaymentsBill
-          setPaymentsBillOpen={setPaymentsBillOpen}
+      {paymentsBillFormOpen && (
+        <PaymentsBillForm
+          setPaymentsBillOpen={setPaymentsBillFormOpen}
           id={selectedBillId}
-          amt={pendingPayments}
+          amt={amoutDetails}
           onUpdate={fetchBills}
         />
+      )}
+      {paymentsBillDetailsOpen && (
+        <PaymentBillModal id={selectedBillId} close={setPaymentsBillDetailsOpen} />
       )}
     </>
   )

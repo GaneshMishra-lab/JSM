@@ -12,7 +12,8 @@ const api = {
   getAllBills: () => ipcRenderer.invoke('get-all-bills'),
   getBillById: (billId) => ipcRenderer.invoke('get-bill-by-id', billId),
   updateBillPayment: ({ billId, paidAmount, date, mode }) =>
-    ipcRenderer.invoke('update-bill-payment', { billId, paidAmount, date, mode })
+    ipcRenderer.invoke('update-bill-payment', { billId, paidAmount, date, mode }),
+  getBillPayment: (billId) => ipcRenderer.invoke('get-bill-payment', billId)
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

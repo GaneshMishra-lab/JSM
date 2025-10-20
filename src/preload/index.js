@@ -9,7 +9,10 @@ const api = {
   showdialogue: (message) => ipcRenderer.invoke('show-dialog', message),
   getAllEntities: () => ipcRenderer.invoke('get-all-entities'),
   searchEntities: (name) => ipcRenderer.invoke('search-entities', name),
-  getAllBills: () => ipcRenderer.invoke('get-all-bills')
+  getAllBills: () => ipcRenderer.invoke('get-all-bills'),
+  getBillById: (billId) => ipcRenderer.invoke('get-bill-by-id', billId),
+  updateBillPayment: ({ billId, paidAmount, date, mode }) =>
+    ipcRenderer.invoke('update-bill-payment', { billId, paidAmount, date, mode })
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

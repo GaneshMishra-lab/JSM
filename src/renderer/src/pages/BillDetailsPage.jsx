@@ -41,7 +41,7 @@ export default function BillDetailsPage() {
             <div className="overflow-x-auto rounded-lg border border-zinc-800">
               <table className="min-w-full text-sm text-left border-collapse">
                 <thead className="bg-zinc-900/60 border-b border-zinc-800 text-zinc-300">
-                  <tr className='text-xl'>
+                  <tr className="text-xl">
                     <th className="py-2 px-4 font-medium">Name</th>
                     <th className="py-2 px-4 font-medium">Weight</th>
                     <th className="py-2 px-4 font-medium">Melting</th>

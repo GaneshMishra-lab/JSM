@@ -13,7 +13,14 @@ const api = {
   getBillById: (billId) => ipcRenderer.invoke('get-bill-by-id', billId),
   updateBillPayment: ({ billId, paidAmount, date, mode }) =>
     ipcRenderer.invoke('update-bill-payment', { billId, paidAmount, date, mode }),
-  getBillPayment: (billId) => ipcRenderer.invoke('get-bill-payment', billId)
+  getBillPayment: (billId) => ipcRenderer.invoke('get-bill-payment', billId),
+  getAllItemPurchased: () => ipcRenderer.invoke('get-all-item-purchased'),
+  getAllItemStock: () => ipcRenderer.invoke('get-all-item-stock'),
+  getAllItemSale: () => ipcRenderer.invoke('get-all-item-sale'),
+  getSilverItemNames: () => ipcRenderer.invoke('get-silver-item-names'),
+  getGoldItemNames: () => ipcRenderer.invoke('get-gold-item-names'),
+  getPurchasedItemCount: ({ name, metal }) =>
+    ipcRenderer.invoke('get-purchased-item-count', { name, metal })
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

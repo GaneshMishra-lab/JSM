@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom'
 const navItems = [
   { name: 'Home', link: '/' },
   { name: 'Sales', link: '/sales' },
-  { name: 'Purchase', link: '/bill' },
+  { name: 'Purchase', link: '/purchase' },
+  { name: 'Bill', link: '/bill' },
   { name: 'Inventory', link: '/inventory' }
 ]
 

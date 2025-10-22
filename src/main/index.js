@@ -12,6 +12,9 @@ import './models/item_sale.model.js'
 import './models/item_sale_details.model.js'
 import './ipc/entity.ipc.js'
 import './ipc/bill.ipc.js'
+import './ipc/item_stock.ipc.js'
+import './ipc/item_purchased.ipc.js'
+import './ipc/item_sale.ipc.js'
 import { dialog } from 'electron'
 
 async function createWindow() {

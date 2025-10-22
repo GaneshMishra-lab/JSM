@@ -7,7 +7,7 @@ export default function PaymentBillModal({ id, close }) {
   useEffect(() => {
     const getBill = async (id) => {
       try {
-        const paymentDetails = await window.api.getBillPayment(id)
+        const paymentDetails = await window.api.bill.getPayment(id)
         if (paymentDetails.length == 0) console.log('no payment')
         setPayment(paymentDetails)
       } catch (error) {

@@ -66,7 +66,7 @@ export default function BillForm() {
     }
     try {
       // send sanitized payload to the main process
-      const response = await window.api.createBill({
+      const response = await window.api.bill.create({
         entity: payload.entity,
         billData: payload.billData,
         items: payload.items
@@ -122,7 +122,7 @@ export default function BillForm() {
                         const value = e.target.value
                         setEntity((prev) => ({ ...prev, name: value }))
                         if (value.trim().length > 0) {
-                          const results = await window.api.searchEntities(value.trim())
+                          const results = await window.api.entity.search(value.trim())
                           console.log('Search results:', results)
                           setEntitySuggestions(results)
                           console.log('Entity suggestions:', entitySuggestions)

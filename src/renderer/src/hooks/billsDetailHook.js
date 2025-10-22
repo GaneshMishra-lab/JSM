@@ -6,7 +6,7 @@ export const useBillsDetail = (billId) => {
   useEffect(() => {
     const fetchBillDetails = async () => {
       try {
-        const billData = await window.api.getBillById(billId)
+        const billData = await window.api.bill.getById(billId)
         setBill(billData)
         setItempurchased(billData.ItemsPurchased)
       } catch (error) {

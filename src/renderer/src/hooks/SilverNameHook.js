@@ -5,7 +5,7 @@ export const useSilverName = () => {
   useEffect(() => {
     const fetchSilverNames = async () => {
       try {
-        const silverNamesData = await window.api.getSilverItemNames()
+        const silverNamesData = await window.api.purchase.getSilverItemNames()
         setSilverNames(silverNamesData)
       } catch (error) {
         console.error('Error fetching gold names:', error)

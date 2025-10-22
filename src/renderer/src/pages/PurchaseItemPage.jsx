@@ -22,11 +22,11 @@ export default function PurchaseItemPage() {
         let countPromises = []
         if (metal === 0)
           countPromises = selectedItem.map((item) =>
-            window.api.getPurchasedItemCount({ name: item, metal: 'Gold' })
+            window.api.purchase.getItemCount({ name: item, metal: 'Gold' })
           )
         else
           countPromises = selectedItem.map((item) =>
-            window.api.getPurchasedItemCount({ name: item, metal: 'Silver' })
+            window.api.purchase.getItemCount({ name: item, metal: 'Silver' })
           )
 
         const counts = await Promise.all(countPromises)

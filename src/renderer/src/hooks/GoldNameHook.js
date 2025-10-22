@@ -5,7 +5,7 @@ export const useGoldName = () => {
   useEffect(() => {
     const fetchGoldNames = async () => {
       try {
-        const goldNamesData = await window.api.getGoldItemNames()
+        const goldNamesData = await window.api.purchase.getGoldItemNames()
         setGoldNames(goldNamesData)
       } catch (error) {
         console.error('Error fetching gold names:', error)

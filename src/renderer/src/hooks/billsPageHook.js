@@ -4,7 +4,7 @@ export const useBillsPage = () => {
 
   const fetchBills = async () => {
     try {
-      const fetchedBills = await window.api.getAllBills()
+      const fetchedBills = await window.api.bill.getAll()
       setBills(fetchedBills)
     } catch (error) {
       console.error('Error fetching bills:', error)

@@ -7,11 +7,11 @@ import {
   CardContent,
   CardFooter
 } from '@/components/ui/card'
-import { useBillsPage } from '../hooks/billsPageHook'
+import { useBillsPage } from '../../hooks/billsPageHook'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
-import PaymentsBillForm from '../components/form/PaymentsBillForm.jsx'
-import PaymentBillModal from '../components/dialog/PaymentBillDetails.jsx'
+import PaymentsBillForm from '../../components/form/PaymentsBillForm.jsx'
+import PaymentBillModal from '../../components/dialog/PaymentBillDetails.jsx'
 
 export default function BillPage() {
   const nav = useNavigate()

@@ -10,3 +10,6 @@ ipcMain.handle('get-gold-item-names', async () => itemPurchasedController.getGol
 ipcMain.handle('get-purchased-item-count', async (event, { name, metal }) =>
   itemPurchasedController.getPurchasedItemCount({ name, metal })
 )
+ipcMain.handle('get-purchased-item-by-name', async (event, { name, metal }) =>
+  itemPurchasedController.getPurchasedItemByName({ name, metal })
+)

@@ -9,8 +9,8 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
-import ItemsTable from '../components/form/ItemsTableBill'
-import ConfirmBill from '../components/dialog/ConfirmBill'
+import ItemsTable from '../../components/form/ItemsTableBill'
+import ConfirmBill from '../../components/dialog/ConfirmBill'
 
 export default function BillForm() {
   const [entitySuggestions, setEntitySuggestions] = useState([])

@@ -73,3 +73,18 @@ export const getPurchasedItemCount = async ({ name, metal }) => {
     throw error
   }
 }
+
+export const getPurchasedItemByName = async ({ name, metal }) => {
+  try {
+    const item = await Itempurchased.findAll({
+      where: {
+        name: name,
+        metal: metal
+      }
+    })
+    return item.map((item) => item.toJSON())
+  } catch (error) {
+    console.error('Error fetching item:', error)
+    throw error
+  }
+}

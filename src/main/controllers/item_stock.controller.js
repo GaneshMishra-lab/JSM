@@ -11,3 +11,31 @@ export const getAllItemStock = async () => {
     throw error
   }
 }
+
+export const createItemStock = async ({ date, id }) => {
+  try {
+    const item = await Itempurchased.findByPk(id)
+    if (!item) {
+      throw new Error('Item not found')
+    }
+    const previousStock = await Itempurchased.findOne({
+      where: {
+        name: item.name,
+        metal: item.metal
+      },
+      include: [{ model: Itemstock, as: 'Stock' }],
+      order: [[{ model: Itemstock, as: 'Stock' }, 'label', 'DESC']]
+    })
+    const newStock = await Itemstock.create({
+      date: date,
+      label: previousStock.Stock ? previousStock.Stock.label + 1 : 1,
+      item: id,
+      status: 'stock'
+    })
+
+    return newStock.toJSON()
+  } catch (error) {
+    console.error('Error creating item stock:', error)
+    throw error
+  }
+}

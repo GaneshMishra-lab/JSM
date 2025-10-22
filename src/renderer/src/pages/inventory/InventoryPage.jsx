@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { useGoldName } from '../hooks/GoldNameHook'
-import { useSilverName } from '../hooks/SilverNameHook'
+import { useGoldName } from '../../hooks/GoldNameHook'
+import { useSilverName } from '../../hooks/SilverNameHook'
 
 export default function InventoryPage() {
   const [metal, setMetal] = useState(0)

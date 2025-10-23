@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useState, useEffect } from 'react'
-import { useBillPaymentUpdate } from '../../hooks/billsPaymentHook'
+import { useBillPaymentUpdate } from '../../hooks/bill/billsPaymentHook'
 export default function PaymentsBillForm({ setPaymentsBillOpen, id, amt, onUpdate }) {
   const today = new Date()
   const formattedDate = today.toISOString().split('T')[0]

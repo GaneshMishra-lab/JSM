@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useBillsDetail } from '../../hooks/billsDetailHook'
+import { useBillsDetail } from '../../hooks/bill/billsDetailHook'
 export default function BillDetailsPage() {
   const { id } = useParams()
   const { bill, loading, Itempurchased } = useBillsDetail(id)

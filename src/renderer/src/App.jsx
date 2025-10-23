@@ -5,6 +5,7 @@ import BillPage from './pages/bill/BillPage'
 import Home from './pages/Home'
 import BillDetailsPage from './pages/bill/BillDetailsPage'
 import InventoryPage from './pages/inventory/InventoryPage'
+import InventoryItemByName from './pages/inventory/InventoryItemByName'
 import PurchaseItemPage from './pages/purchase/PurchaseItemPage'
 import PurchaseItemByName from './pages/purchase/PurchaseItemByName'
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/bill/:id" element={<BillDetailsPage />} />
         <Route path="/" element={<Home />} />
         <Route path="/inventory" element={<InventoryPage />} />
+        <Route path="/inventory/:metal/:name" element={<InventoryItemByName />} />
         <Route path="/purchase" element={<PurchaseItemPage />} />
         <Route path="/purchase/:metal/:name" element={<PurchaseItemByName />} />
       </Routes>

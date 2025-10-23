@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter
 } from '@/components/ui/card'
-import { useBillsPage } from '../../hooks/billsPageHook'
+import { useBillsPage } from '../../hooks/bill/billsPageHook'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import PaymentsBillForm from '../../components/form/PaymentsBillForm.jsx'

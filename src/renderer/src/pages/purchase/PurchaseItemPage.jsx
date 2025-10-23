@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useGoldName } from '../../hooks/GoldNameHook'
-import { useSilverName } from '../../hooks/SilverNameHook'
+import { useGoldName } from '../../hooks/purchase/GoldNameHook'
+import { useSilverName } from '../../hooks/purchase/SilverNameHook'
 import { useNavigate } from 'react-router-dom'
 export default function PurchaseItemPage() {
   const nav = useNavigate()
@@ -9,7 +9,7 @@ export default function PurchaseItemPage() {
   const { silverNames } = useSilverName()
 
   const [selectedItem, setSelectedItem] = useState(goldNames)
-  const [itemsWithCount, setItemsWithCount] = useState([])
+  const [itemsWithSummary, setItemsWithSummary] = useState([])
   const [seletedItemId, setSeletedItemId] = useState(-1)
   useEffect(() => {
     if (metal === 0) {
@@ -20,29 +20,30 @@ export default function PurchaseItemPage() {
   }, [metal, goldNames, silverNames])
 
   useEffect(() => {
-    const fetchItemsWithCount = async () => {
+    const fetchItemsWithSummary = async () => {
       try {
-        let countPromises = []
+        let summaryPromises = []
         if (metal === 0)
-          countPromises = selectedItem.map((item) =>
-            window.api.purchase.getItemCount({ name: item, metal: 'Gold' })
+          summaryPromises = selectedItem.map((item) =>
+            window.api.purchase.getItemSummary({ name: item, metal: 'Gold' })
           )
         else
-          countPromises = selectedItem.map((item) =>
-            window.api.purchase.getItemCount({ name: item, metal: 'Silver' })
+          summaryPromises = selectedItem.map((item) =>
+            window.api.purchase.getItemSummary({ name: item, metal: 'Silver' })
           )
 
-        const counts = await Promise.all(countPromises)
-        const itemsWithCount = selectedItem.map((item, index) => ({
+        const summaries = await Promise.all(summaryPromises)
+        const itemWithSummary = selectedItem.map((item, index) => ({
           name: item,
-          count: counts[index]
+          count: summaries[index].count,
+          total_weight: summaries[index].total_weight
         }))
-        setItemsWithCount(itemsWithCount)
+        setItemsWithSummary(itemWithSummary)
       } catch (error) {
         console.error('Error fetching item count:', error)
       }
     }
-    fetchItemsWithCount()
+    fetchItemsWithSummary()
   }, [selectedItem, metal])
   return (
     <>
@@ -71,7 +72,7 @@ export default function PurchaseItemPage() {
           <table className="w-[40vw] min-w-full border-collapse  text-xl">
             <thead className="bg-zinc-800 text-zinc-300 sticky top-0">
               <tr>
-                {['Item Name', 'Count', 'Action'].map((head) => (
+                {['Item Name', 'Count', 'Weight', 'Action'].map((head) => (
                   <th
                     key={head}
                     className="px-3 py-2 border-b border-zinc-700 cursor-default text-center font-medium"
@@ -82,7 +83,7 @@ export default function PurchaseItemPage() {
               </tr>
             </thead>
             <tbody>
-              {itemsWithCount.map((item, idx) => {
+              {itemsWithSummary.map((item, idx) => {
                 return (
                   <tr
                     key={idx}
@@ -100,6 +101,9 @@ export default function PurchaseItemPage() {
                     </td>
                     <td className="px-3 py-4 border-b cursor-pointer border-zinc-800 text-center">
                       {item.count}
+                    </td>
+                    <td className="px-3 py-4 border-b cursor-pointer border-zinc-800 text-center">
+                      {item.total_weight ? item.total_weight : 0}g
                     </td>
                     <td className="px-3 py-4 ... text-center">
                       <button

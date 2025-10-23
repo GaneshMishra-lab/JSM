@@ -1,3 +1,5 @@
+import { Sequelize } from 'sequelize'
+import { Bill } from '../models/bill.model'
 import { Itempurchased } from '../models/item_purchased.model'
 import { Itemstock } from '../models/item_stock.model'
 
@@ -59,15 +61,23 @@ export const getGoldItemNames = async () => {
   }
 }
 
-export const getPurchasedItemCount = async ({ name, metal }) => {
+
+export const getPurchasedItemSummary = async ({ name, metal }) => {
   try {
-    const itemCount = await Itempurchased.count({
+    const summary = await Itempurchased.findOne({
+      include: [{ model: Itemstock, as: 'Stock' }],
       where: {
         name: name,
-        metal: metal
-      }
+        metal: metal,
+        '$Stock.id$': null
+      },
+      attributes: [
+        [Sequelize.fn('COUNT', Sequelize.col('Item_purchased.id')), 'count'],
+        [Sequelize.fn('SUM', Sequelize.col('Item_purchased.weight')), 'total_weight']
+      ],
+      raw: true
     })
-    return itemCount
+    return summary
   } catch (error) {
     console.error('Error fetching item count:', error)
     throw error
@@ -77,9 +87,14 @@ export const getPurchasedItemCount = async ({ name, metal }) => {
 export const getPurchasedItemByName = async ({ name, metal }) => {
   try {
     const item = await Itempurchased.findAll({
+      include: [
+        { model: Itemstock, as: 'Stock' },
+        { model: Bill, as: 'Bill' }
+      ],
       where: {
         name: name,
-        metal: metal
+        metal: metal,
+        '$stock.id$': null
       }
     })
     return item.map((item) => item.toJSON())
